@@ -8,13 +8,11 @@ body {
 #defaultMenu {
   margin-bottom: 15px;
   text-align: center;
-  /*font-size: 2em; OPTIONAL Lecture 18*/
 }
 #mobileMenu {
   display: none;
 }
 div#container {
-  /*background-color: red;*/
 }
 .title {
   position: relative;
