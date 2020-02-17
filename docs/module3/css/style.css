@@ -1,0 +1,62 @@
+/********** Base styles **********/
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+/** HEADER **/
+#header-nav {
+  background-color: lightblue; /* Define color for nav */
+  border-radius: 0;
+  border: 0;
+}
+.navbar-brand {
+  padding-top: 15px;
+}
+.navbar-brand h1 { /* Food LLC */
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px #222;
+  margin-top: 0;
+  line-height: .75;
+}
+.navbar-brand a:hover, .navbar-brand a:focus {
+  text-decoration: none;
+}
+#nav-list a:hover {
+  background: pink;
+}
+#nav-list a p {
+  font-size: 1.5em;
+}
+.navbar-header button.navbar-toggle, .navbar-header .icon-bar {
+  border: 1px solid blue;
+}
+#nav-list {
+  /*background-color: blue;*/
+}
+/** END OF HEADER **/
+/** CONTENT **/
+#defaultMenu {
+  margin-bottom: 15px;
+}
+#chicken-text{
+  padding: 10px;
+}
+#beef-text {
+  padding: 10px;
+}
+#sushi-text {
+  padding: 10px;
+}
+#chicken-div, #beef-div, #sushi-div {
+  height: 700px;
+  width: 100%;
+  margin-bottom: 15px;
+  position: relative;
+  border: 2px solid #3F0C1F;
+  overflow: hidden;
+  background-color: lightblue;
+}
+/** END OF CONTENT **/
