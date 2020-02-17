@@ -2,38 +2,81 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Module 2</title>
+	<title>Module 3</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<h1 id="defaultMenu">Our Menu</h1>
-<h1 id="mobileMenu">Categories</h1>
-<div id="container">
-	<section class="row col-lg-4 col-md-6 col-sm-12">
-		<div id="chicken" class="title">Chicken</div>
-		<div id="chickenLong">This section loves to talk about how great 
-		chicken is.</div>
-		<p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-		incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-		ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	</section>
-	<section class="row col-lg-4 col-md-6 col-sm-12">
-		<div id="beef" class="title">Beef</div>
-		<div id="beefLong">This section loves to talk about how great 
-		beef is.</div>
-		<p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-		incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-		ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	</section>
-	<section class="row col-lg-4 col-md-12 col-sm-12">
-		<div id="sushi" class="title">Sushi</div>
-		<div id="sushiLong">This section loves to talk about how great 
-		sushi is.</div>
-		<p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-		incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-		ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-	</section>
+	<header class="nav-header">
+    <nav id="header-nav" class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<a href="index.html"><h1 class="nav-brand">Food, LLC</h1></a>
+				</div>
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+				data-target="#collapsable-nav" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="collapsable-nav" class="collapse navbar-collapse">
+			<ul id="nav-list" class="nav navbar-nav navbar-right visible-xs">
+				<li class="text-center">
+					<a href="#chicken-div"><p class="item">Chicken</p></a>
+					<hr class="visible-xs">
+				</li>            
+				<li class="text-center beef-item">
+					<a href="#beef-div"><p class="item">Beef</p></a>
+					<hr class="visible-xs">
+				</li>
+				<li class="text-center sushi-item">
+					<a href="#sushi-div"><p class="item">Sushi</p></a>
+				</li>
+			</ul> 
+			</div>
+		</div>
+    </nav>
+  	</header>
+<h2 id="defaultMenu" class="text-center">Our Menu</h2>
+<div id="main-content" class="container">
+	<div class="row">
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<div id="chicken-div">
+		<h3 class="text-center">Chicken</h3>
+		<p id="chicken-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Varius quam quisque id diam vel. Aliquet eget sit amet tellus cras adipiscing enim. Integer vitae justo eget magna fermentum iaculis eu non. Aliquam ut porttitor leo a diam sollicitudin. Sit amet cursus sit amet dictum. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Pulvinar etiam non quam lacus. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Ullamcorper eget nulla facilisi etiam dignissim. Quis lectus nulla at volutpat diam ut venenatis. Ornare massa eget egestas purus viverra. Lobortis scelerisque fermentum dui faucibus in ornare. Velit dignissim sodales ut eu sem integer.
+			(END OF CHICKEN SECTION)<a href="#defaultMenu">Back to the top</a>
+		</p>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-6 col-xs-12">
+		<div id="beef-div">
+		<h3 class="text-center">Beef</h3>
+		<p id="beef-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Varius quam quisque id diam vel. Aliquet eget sit amet tellus cras adipiscing enim. Integer vitae justo eget magna fermentum iaculis eu non. Aliquam ut porttitor leo a diam sollicitudin. Sit amet cursus sit amet dictum. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Pulvinar etiam non quam lacus. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Ullamcorper eget nulla facilisi etiam dignissim. Quis lectus nulla at volutpat diam ut venenatis. Ornare massa eget egestas purus viverra. Lobortis scelerisque fermentum dui faucibus in ornare. Velit dignissim sodales ut eu sem integer.
+			(END OF BEEF SECTION)<a href="#defaultMenu">Back to the top</a>
+		</p>
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-12 col-xs-12">
+		<div id="sushi-div">
+		<h3 class="text-center">Sushi</h3>
+		<p id="sushi-text">
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Varius quam quisque id diam vel. Aliquet eget sit amet tellus cras adipiscing enim. Integer vitae justo eget magna fermentum iaculis eu non. Aliquam ut porttitor leo a diam sollicitudin. Sit amet cursus sit amet dictum. Cras tincidunt lobortis feugiat vivamus at augue eget arcu. Pulvinar etiam non quam lacus. Tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Ullamcorper eget nulla facilisi etiam dignissim. Quis lectus nulla at volutpat diam ut venenatis. Ornare massa eget egestas purus viverra. Lobortis scelerisque fermentum dui faucibus in ornare. Velit dignissim sodales ut eu sem integer.
+			(END OF SUSHI SECTION)<a href="#defaultMenu">Back to the top</a>
+		</p>
+		</div>
+	</div>
+	</div>
 </div>
+	<!-- jQuery (Bootstrap JS plugins depend on it) -->
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/script.js"></script>
 </body>
 </html>
