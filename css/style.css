@@ -25,7 +25,7 @@ body {
   text-decoration: none;
 }
 #nav-list a:hover {
-  background: #E7E7E7;
+  background: pink;
 }
 #nav-list a p {
   font-size: 1.5em;
