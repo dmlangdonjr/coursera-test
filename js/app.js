@@ -2,65 +2,60 @@
 (function () {
 	'use strict';
 	
-	angular.module('LunchCheck', [])
-	
-	.controller('LunchCheckController', LunchCheckController);
+	angular.module('ShoppingListCheckOff', [])
+	.controller('ToBuyController', ToBuyController)
+    .controller('AlreadyBoughtController', AlreadyBoughtController)
+	.service('ShoppingListCheckOffService', ShoppingListCheckOffService)
+	.filter('dollar', DollarFilter);
 
-	LunchCheckController.$inject = ['$scope'];  
+	function ShoppingListCheckOffService() {
+        var service = this;
 
-	function LunchCheckController($scope) {
-		$scope.message = "";
-		$scope.lunchItems = "";
-		$scope.warning = "";
-		$scope.messageColor = "";
-		$scope.textBoxColor = "";
+        var toBuyItems = [];
+        var boughtItems = [];
 
-		$scope.checkTooMuch = function () {
-			$scope.warning = "";
-			$scope.messageColor = "";
-			$scope.textBoxColor = "";
+        toBuyItems = [{name: "boxes of cookies", quantity: 10, pricePerItem: 2},
+	        {name: "bottles of water", quantity: 4, pricePerItem: 1},
+	        {name: "bars of soap", quantity: 3, pricePerItem: 3},
+	        {name: "gallon of milk", quantity: 1, pricePerItem: 2},
+	        {name: "boxes of cereal", quantity: 4, pricePerItem: 3}];
 
-			if($scope.lunchItems == "") {
-				$scope.message = "Please enter data first";
-				$scope.messageColor = "red";
-				$scope.textBoxColor = "red";
-				return;
-			}
+        service.getItemsToBuy = function () {
+            return toBuyItems;
+        };
 
-			var list = $scope.lunchItems.split(',');
-			var count = listCount(list);
+        service.getItemsBought = function () {
+            return boughtItems;
+        };
 
-			if(count == 0) {
-				$scope.message = "Please enter data first";
-				$scope.warning = "We do not consider empty items valid lunch items i.e. , , ,"
-				$scope.messageColor = "red";
-				$scope.textBoxColor = "red";
-				return;
-			} else if(count !== list.length) {
-				$scope.warning = "We do not consider empty items valid lunch items i.e. , , ,"
-			}
+        service.buyItem = function (itemIndex) {
+            var removedItems = toBuyItems.splice(itemIndex,1);
+            boughtItems.push(removedItems[0]);
+        };
+    };
 
-			if(count > 3) {
-				$scope.message = "Too much! Length: " + count;
-				$scope.messageColor = "green";
-				$scope.textBoxColor = "green";
-			} else {
-				$scope.message = "Enjoy! Length: " + count;
-				$scope.messageColor = "green";
-				$scope.textBoxColor = "green";
-			}
-		};
+	ToBuyController.$inject = ['ShoppingListCheckOffService'];
+    function ToBuyController (ShoppingListCheckOffService) {
+        var toBuy = this;
 
-		function listCount(list) {
-			var total = 0;
+        toBuy.items = ShoppingListCheckOffService.getItemsToBuy();
 
-			for(var i = 0; i < list.length; i++) {
-				if(list[i].trim() !== "") {
-					total++;
-				}
-			}
+        toBuy.buyItem = function (itemIndex) {
+            ShoppingListCheckOffService.buyItem(itemIndex);
+        };
+    };
 
-			return total;
-		};
-	};
+    AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+    function AlreadyBoughtController (ShoppingListCheckOffService) {
+        var alreadyBought = this;
+
+        alreadyBought.items = ShoppingListCheckOffService.getItemsBought();
+    };
+
+    function DollarFilter() {
+    	return function (input) {
+    		return "$$$" + input + ".00"
+    	}
+    }
+
 })();
