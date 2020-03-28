@@ -9,26 +9,25 @@
 	.filter('dollar', DollarFilter);
 
 	function ShoppingListCheckOffService() {
-        var service = this;
+        var shoppingService = this;
 
-        var toBuyItems = [];
         var boughtItems = [];
 
-        toBuyItems = [{name: "boxes of cookies", quantity: 10, pricePerItem: 2},
+        var toBuyItems = [{name: "boxes of cookies", quantity: 10, pricePerItem: 2},
 	        {name: "bottles of water", quantity: 4, pricePerItem: 1},
 	        {name: "bars of soap", quantity: 3, pricePerItem: 3},
 	        {name: "gallon of milk", quantity: 1, pricePerItem: 2},
 	        {name: "boxes of cereal", quantity: 4, pricePerItem: 3}];
 
-        service.getItemsToBuy = function () {
+        shoppingService.getToBuyItems = function () {
             return toBuyItems;
         };
 
-        service.getItemsBought = function () {
+        shoppingService.getBoughtItems = function () {
             return boughtItems;
         };
 
-        service.buyItem = function (itemIndex) {
+        shoppingService.buyItem = function (itemIndex) {
             var removedItems = toBuyItems.splice(itemIndex,1);
             boughtItems.push(removedItems[0]);
         };
@@ -38,7 +37,7 @@
     function ToBuyController (ShoppingListCheckOffService) {
         var toBuy = this;
 
-        toBuy.items = ShoppingListCheckOffService.getItemsToBuy();
+        toBuy.items = ShoppingListCheckOffService.getToBuyItems();
 
         toBuy.buyItem = function (itemIndex) {
             ShoppingListCheckOffService.buyItem(itemIndex);
@@ -49,7 +48,7 @@
     function AlreadyBoughtController (ShoppingListCheckOffService) {
         var alreadyBought = this;
 
-        alreadyBought.items = ShoppingListCheckOffService.getItemsBought();
+        alreadyBought.items = ShoppingListCheckOffService.getBoughtItems();
     };
 
     function DollarFilter() {
