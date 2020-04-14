@@ -1,61 +1,93 @@
+(function() {
+  'use strict';
+  angular
+  .module('NarrowItDownApp', [])
+  .controller('NarrowItDownController', NarrowItDownController)
+  .service('MenuSearchService', MenuSearchService)
+  .directive('foundItems', FoundItemsDirective)
+  .factory('MenuSearchFactory', MenuSearchFactory)
+  .constant('ApiBasePath', "https://davids-restaurant.herokuapp.com");
+  
+  MenuSearchService.$inject = ['$http', 'ApiBasePath'];
+  function MenuSearchService($http, ApiBasePath) {
+    var service = this;
 
-(function () {
-	'use strict';
-	
-	angular.module('ShoppingListCheckOff', [])
-	.controller('ToBuyController', ToBuyController)
-    .controller('AlreadyBoughtController', AlreadyBoughtController)
-	.service('ShoppingListCheckOffService', ShoppingListCheckOffService)
-	.filter('dollar', DollarFilter);
+    service.getMatchedMenuItems = function(searchTerm) {
+        return $http({
+          method: 'GET',
+          url: (ApiBasePath + '/menu_items.json')
+        }).then(function (result) {
+      
+        var items = result.data.menu_items;
 
-	function ShoppingListCheckOffService() {
-        var service = this;
+        var foundItems = [];
 
-        var toBuyItems = [];
-        var boughtItems = [];
+        for (var i = 0; i < items.length; i++) {
+          if (items[i].description.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0) {
+            foundItems.push(items[i]);
+          }
+        }
 
-        toBuyItems = [{name: "boxes of cookies", quantity: 10, pricePerItem: 2},
-	        {name: "bottles of water", quantity: 4, pricePerItem: 1},
-	        {name: "bars of soap", quantity: 3, pricePerItem: 3},
-	        {name: "gallon of milk", quantity: 1, pricePerItem: 2},
-	        {name: "boxes of cereal", quantity: 4, pricePerItem: 3}];
-
-        service.getItemsToBuy = function () {
-            return toBuyItems;
-        };
-
-        service.getItemsBought = function () {
-            return boughtItems;
-        };
-
-        service.buyItem = function (itemIndex) {
-            var removedItems = toBuyItems.splice(itemIndex,1);
-            boughtItems.push(removedItems[0]);
-        };
+        return foundItems;
+      });
+    };
+  }
+  
+  function MenuSearchFactory() {
+    var factory = function () {
+      return new MenuSearchService();
     };
 
-	ToBuyController.$inject = ['ShoppingListCheckOffService'];
-    function ToBuyController (ShoppingListCheckOffService) {
-        var toBuy = this;
+    return factory;
+  }
+  
+  NarrowItDownController.$inject = ['MenuSearchService'];
+  function NarrowItDownController(MenuSearchService) {
+    var ndController = this;
 
-        toBuy.items = ShoppingListCheckOffService.getItemsToBuy();
+    ndController.searchTerm = "";
 
-        toBuy.buyItem = function (itemIndex) {
-            ShoppingListCheckOffService.buyItem(itemIndex);
-        };
+    ndController.narrowSearch = function() {
+      if (ndController.searchTerm === "") {
+        ndController.items = [];
+        return;
+      }
+      
+      var promise = MenuSearchService.getMatchedMenuItems(ndController.searchTerm);
+      
+      promise.then(function(response) {
+        ndController.items = response;
+      }).catch(function(error) {
+        console.log("The following error has occured: ", error);
+      });
     };
 
-    AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
-    function AlreadyBoughtController (ShoppingListCheckOffService) {
-        var alreadyBought = this;
-
-        alreadyBought.items = ShoppingListCheckOffService.getItemsBought();
+  ndController.removeItem = function(index) {
+      ndController.items.splice(index, 1);
     };
+  }
 
-    function DollarFilter() {
-    	return function (input) {
-    		return "$$$" + input + ".00"
-    	}
+  function FoundItemsDirective() {
+    var ddo = {
+      templateUrl: 'foundItems.html',
+      scope: {
+        found: '<',
+        onRemove: '&'
+      },
+      controller: FoundItemsDirectiveController,
+      controllerAs: 'itemsList',
+      bindToController: true
+    };
+    
+    return ddo;
+  }
+
+  function FoundItemsDirectiveController() {
+    var itemsList = this;
+
+    itemsList.isEmpty = function() {
+      return itemsList.found != undefined && itemsList.found.length === 0;
     }
+  }
 
 })();
